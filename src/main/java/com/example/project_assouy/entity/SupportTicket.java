@@ -1,5 +1,7 @@
-package com.example.project_assouy;
+package com.example.project_assouy.entity;
 
+import com.example.project_assouy.enums.TicketPriority;
+import com.example.project_assouy.enums.TicketStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -12,10 +14,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Setter
 @Entity
 @Table(name = "support_tickets")
-public class SupportTicket {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+public class SupportTicket extends StandartEntityId{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -31,14 +30,12 @@ public class SupportTicket {
     @Column(name = "description", nullable = false, length = Integer.MAX_VALUE)
     private String description;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "priority_id", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "priority_id")
     private TicketPriority priority;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "status_id", nullable = false)
+    @Enumerated(EnumType.STRING)
+    @JoinColumn(name = "status_id")
     private TicketStatus status;
 
 }

@@ -1,26 +1,25 @@
-package com.example.project_assouy;
+package com.example.project_assouy.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
+import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "user_security")
-public class UserSecurity {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Integer id;
+public class UserSecurity extends StandartEntityId{
 
-    @Column(name = "user_id")
-    private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User userId;
 
     @Column(name = "two_factor_enabled")
     private Boolean twoFactorEnabled;

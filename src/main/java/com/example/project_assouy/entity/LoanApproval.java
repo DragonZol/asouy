@@ -1,7 +1,8 @@
-package com.example.project_assouy;
+package com.example.project_assouy.entity;
 
+import com.example.project_assouy.enums.Stage;
+import com.example.project_assouy.enums.StatusApproval;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.OnDelete;
@@ -13,10 +14,7 @@ import java.time.Instant;
 @Setter
 @Entity
 @Table(name = "loan_approval")
-public class LoanApproval {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+public class LoanApproval extends StandartEntityId{
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -27,15 +25,13 @@ public class LoanApproval {
     @JoinColumn(name = "approver_id")
     private User approver;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "stage_id", nullable = false)
-    private LoanApprovalStage stage;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "stage", nullable = false)
+    private Stage stage;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "status_id", nullable = false)
-    private LoanApprovalStatus status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status" )
+    private StatusApproval status;
 
     @Column(name = "created_at")
     private Instant createdAt;
