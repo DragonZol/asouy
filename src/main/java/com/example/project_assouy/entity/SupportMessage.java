@@ -29,7 +29,5 @@ public class SupportMessage extends StandartEntityId {
     @Column(name = "message", nullable = false, length = Integer.MAX_VALUE)
     private String message;
 
-    @Column(name = "created_at")
-    private Instant createdAt;
 
 }

@@ -34,7 +34,5 @@ public class LoanApplication extends StandartEntityId {
     @Column(name = "status", nullable = false)
     private StatusApplication status;
 
-    @Column(name = "created_at")
-    private Instant createdAt;
 
 }

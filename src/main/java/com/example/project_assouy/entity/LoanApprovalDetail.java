@@ -25,7 +25,5 @@ public class LoanApprovalDetail extends StandartEntityId{
     @Column(name = "comment", length = Integer.MAX_VALUE)
     private String comment;
 
-    @Column(name = "updated_at")
-    private Instant updatedAt;
 
 }
