@@ -33,7 +33,6 @@ public class LoanApproval extends StandartEntityId{
     @Column(name = "status" )
     private StatusApproval status;
 
-    @Column(name = "created_at")
-    private Instant createdAt;
+
 
 }

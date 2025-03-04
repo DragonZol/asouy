@@ -31,7 +31,5 @@ public class UserSecurity extends StandartEntityId{
     @Column(name = "last_login_at")
     private Instant lastLoginAt;
 
-    @Column(name = "deleted_at")
-    private Instant deletedAt;
 
 }

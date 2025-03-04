@@ -35,7 +35,7 @@ public class SupportTicket extends StandartEntityId{
     private TicketPriority priority;
 
     @Enumerated(EnumType.STRING)
-    @JoinColumn(name = "status_id")
+    @Column(name = "status_id")
     private TicketStatus status;
 
 }
