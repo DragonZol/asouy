@@ -1,5 +1,6 @@
-package com.example.project_assouy;
+package com.example.project_assouy.entity;
 
+import com.example.project_assouy.enums.MessageSender;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -13,19 +14,15 @@ import java.time.Instant;
 @Setter
 @Entity
 @Table(name = "support_messages")
-public class SupportMessage {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+public class SupportMessage extends StandartEntityId {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "ticket_id")
     private SupportTicket ticket;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "sender_id", nullable = false)
+   @Enumerated(EnumType.STRING)
+   @Column(name = "sender_type")
     private MessageSender sender;
 
     @NotNull

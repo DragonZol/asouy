@@ -1,27 +1,25 @@
-package com.example.project_assouy;
+package com.example.project_assouy.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.LocalDate;
+import java.util.UUID;
 
 @Getter
 @Setter
 @Entity
 @Table(name = "user_personal")
-public class UserPersonal {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Integer id;
-
-    @Column(name = "user_id")
-    private Integer userId;
+public class UserPersonal extends StandartEntityId {
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User userId;
 
     @Size(max = 100)
     @NotNull

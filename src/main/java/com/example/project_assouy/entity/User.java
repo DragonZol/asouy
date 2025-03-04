@@ -1,5 +1,6 @@
-package com.example.project_assouy;
+package com.example.project_assouy.entity;
 
+import com.example.project_assouy.enums.Role;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -10,10 +11,7 @@ import lombok.Setter;
 @Setter
 @Entity
 @Table(name = "users")
-public class User {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+public class User extends StandartEntityId{
 
     @Size(max = 15)
     @NotNull
@@ -30,10 +28,9 @@ public class User {
     @Column(name = "password_hash", nullable = false)
     private String passwordHash;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "role_id", nullable = false)
-    private UserRole role;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role_id")
+    private Role role;
 
     @Column(name = "is_active")
     private Boolean isActive;

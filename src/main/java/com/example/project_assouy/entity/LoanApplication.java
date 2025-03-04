@@ -1,5 +1,6 @@
-package com.example.project_assouy;
+package com.example.project_assouy.entity;
 
+import com.example.project_assouy.enums.StatusApplication;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Getter;
@@ -14,10 +15,7 @@ import java.time.Instant;
 @Setter
 @Entity
 @Table(name = "loan_applications")
-public class LoanApplication {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Long id;
+public class LoanApplication extends StandartEntityId {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -32,10 +30,9 @@ public class LoanApplication {
     @Column(name = "term_years", nullable = false)
     private Integer termYears;
 
-    @NotNull
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "status_id", nullable = false)
-    private LoanStatus status;
+    @Enumerated(EnumType.STRING)
+    @Column(name = "status", nullable = false)
+    private StatusApplication status;
 
     @Column(name = "created_at")
     private Instant createdAt;

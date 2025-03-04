@@ -1,11 +1,10 @@
-package com.example.project_assouy;
+package com.example.project_assouy.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.time.Instant;
 
@@ -13,13 +12,12 @@ import java.time.Instant;
 @Setter
 @Entity
 @Table(name = "loan_approval_details")
-public class LoanApprovalDetail {
-    @Id
-    @Column(name = "id", nullable = false)
-    private Integer id;
+public class LoanApprovalDetail extends StandartEntityId{
 
-    @Column(name = "approval_id")
-    private Integer approvalId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JoinColumn(name = "approval_id")
+    private LoanApproval approvalId;
 
     @Column(name = "credit_score")
     private Integer creditScore;
