@@ -1,22 +1,21 @@
 <script setup>
 import HelloWorld from './components/HelloWorld.vue'
+function toggleDarkMode() {
+    const isDarkMode = document.documentElement.classList.toggle('my-app-dark');
+    localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
+}
+
+// Проверяем состояние темной темы при запуске
+if (localStorage.getItem('darkMode') === 'enabled') {
+    document.documentElement.classList.add('my-app-dark');
+} 
 </script>
 
 <template>
+  <Button label="Toggle Dark Mode" @click="toggleDarkMode()" />
 <router-view></router-view>
 </template>
 
 <style scoped>
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.vue:hover {
-  filter: drop-shadow(0 0 2em #42b883aa);
-}
+
 </style>
