@@ -1,29 +1,55 @@
 <template>
   <div class="auth-container">
     <h2 class="auth-header">
-      <i class="pi pi-globe" style="color: green; font-size: 3rem;"></i> ВЛБ - Ваш лучший банк
+      <i class="pi pi-globe" style="color: green; font-size: 3rem"></i> ВЛБ -
+      Ваш лучший банк
     </h2>
-    <Card>
+    <Card class="auth-form">
       <template #title>Вход в ваш лучший банк</template>
       <template #content>
         <Form @submit="handleSubmit">
           <div class="form-group">
-            <InputText v-model="login" id="login" placeholder="Введите ваш логин" required />
+            <InputText
+              v-model="login"
+              id="login"
+              placeholder="Введите ваш логин"
+              required
+              class="input-field"
+            />
           </div>
 
           <div class="form-group">
-            <Password v-model="password" id="password" placeholder="Введите ваш пароль" toggleMask required />
+            <!-- FIXME Пароль не растягивается по ширине-->
+             <!-- todo Для регистрации оценка пароля-->
+            <Password
+              v-model="password"
+              id="password"
+              placeholder="Введите ваш пароль"
+              toggleMask
+              required
+              class="input-field"
+              style="width: 100%"
+              promptLabel="Выберите пароль"
+              weakLabel="Слишком лёгкий"
+              mediumLabel="Хороший пароль"
+              strongLabel="Надёжный пароль"
+            />
           </div>
 
-          <div style="display: flex;">
+          <div style="display: flex">
             <Checkbox v-model="remember_me" binary />
-            <label for="remember_me" style="margin-left: 0.5rem;">Запомнить меня</label>
+            <label for="remember_me" style="margin-left: 0.5rem"
+              >Запомнить меня</label
+            >
           </div>
 
           <Button label="Войти" type="submit" class="submit-btn" />
-      </Form>
+
+          <div style="text-align: center; margin-top: 1rem">
+            <router-link to="/sign-up">Нет аккаунта нашего банка?</router-link>
+          </div>
+        </Form>
       </template>
-      
     </Card>
   </div>
 </template>
@@ -36,14 +62,14 @@ const remember_me = ref(false);
 export default {
   data() {
     return {
-      login: '',
-      password: '',
-      remember_me: false
+      login: "",
+      password: "",
+      remember_me: false,
     };
   },
   methods: {
     handleSubmit() {
-      console.log('Вход:', this.login, this.password, this.remember_me);
+      console.log("Вход:", this.login, this.password, this.remember_me);
     },
   },
 };
@@ -55,13 +81,13 @@ export default {
   justify-content: center;
   align-items: center;
   height: 100vh;
-  font-family: 'Arial', sans-serif;
-  flex-direction: column; /* Ставим элементы по вертикали */
+  font-family: "Arial", sans-serif;
+  flex-direction: column;
 }
 
 .auth-header {
-  font-size: 2.5rem; /* Увеличиваем размер заголовка */
-  margin-bottom: 2rem; /* Отступ от формы */
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
   text-align: center;
 }
 
@@ -75,13 +101,15 @@ export default {
   width: 100%;
 }
 
-@media (max-width: 600px) {
-  .auth-form {
-    padding: 1.5rem;
-  }
+.input-field {
+  margin-top: 1.5rem;
+  width: 100%;
+  display: block;
+}
 
-  h2 {
-    font-size: 1.5rem;
-  }
+.auth-form {
+  padding: 1.5rem;
+  min-width: 500px;
+  text-align: center;
 }
 </style>
