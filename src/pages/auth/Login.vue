@@ -20,7 +20,6 @@
 
           <div class="form-group">
             <!-- FIXME Пароль не растягивается по ширине-->
-             <!-- todo Для регистрации оценка пароля-->
             <Password
               v-model="password"
               id="password"
@@ -29,10 +28,6 @@
               required
               class="input-field"
               style="width: 100%"
-              promptLabel="Выберите пароль"
-              weakLabel="Слишком лёгкий"
-              mediumLabel="Хороший пароль"
-              strongLabel="Надёжный пароль"
             />
           </div>
 

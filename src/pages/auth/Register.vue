@@ -1,71 +1,115 @@
 <template>
-    <div class="auth-container">
-      <h2>Регистрация</h2>
-      <form @submit.prevent="handleSubmit">
-        <div>
-          <label for="username">Имя пользователя</label>
-          <input type="text" v-model="username" id="username" required />
-        </div>
-        <div>
-          <label for="email">Электронная почта</label>
-          <input type="email" v-model="email" id="email" required />
-        </div>
-        <div>
-          <label for="password">Пароль</label>
-          <input type="password" v-model="password" id="password" required />
-        </div>
-        <button type="submit">Зарегистрироваться</button>
-      </form>
-    </div>
-  </template>
-  
-  <script>
-  export default {
-    data() {
-      return {
-        username: '',
-        email: '',
-        password: '',
-      };
+  <div class="auth-container">
+    <h2 class="auth-header">
+      <i class="pi pi-globe" style="color: green; font-size: 3rem"></i>
+      ВЛБ - Ваш лучший банк
+    </h2>
+    <Card class="auth-form">
+      <template #title>Регистрация</template>
+      <template #content>
+        <Form @submit="handleSubmit">
+          <div class="form-group">
+            <InputMask
+              v-model="phone_number"
+              id="phone_number"
+              mask="+9(999) 999-99-99"
+              placeholder="Введите номер телефона"
+              required
+              class="input-field"
+            />
+          </div>
+
+          <div class="form-group">
+            <InputText
+              v-model="username"
+              id="username"
+              placeholder="Введите имя пользователя"
+              required
+              class="input-field"
+            />
+          </div>
+          <!-- FIXME Пароль не растягивается по ширине-->
+          <div class="form-group">
+            <Password
+              v-model="password"
+              id="password"
+              placeholder="Введите ваш пароль"
+              toggleMask
+              required
+              class="input-field"
+              style="width: 100%"
+              promptLabel="Выберите пароль"
+              weakLabel="Слишком лёгкий"
+              mediumLabel="Хороший пароль"
+              strongLabel="Надёжный пароль"
+            />
+          </div>
+
+          <Button label="Зарегистрироваться" type="submit" class="submit-btn" />
+
+          <div style="text-align: center; margin-top: 1rem">
+            <router-link to="/sign-in">Уже есть аккаунт? Войдите</router-link>
+          </div>
+        </Form>
+      </template>
+    </Card>
+  </div>
+</template>
+
+<script>
+import { ref } from "vue";
+
+export default {
+  data() {
+    return {
+      username: "",
+      email: "",
+      password: "",
+    };
+  },
+  methods: {
+    handleSubmit() {
+      console.log("Регистрация:", this.username, this.phone_number, this.password);
     },
-    methods: {
-      handleSubmit() {
-        // Здесь будет логика отправки данных на сервер или в хранилище
-        console.log('Регистрация:', this.username, this.email, this.password);
-      },
-    },
-  };
-  </script>
-  
-  <style scoped>
-  .auth-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 10px;
-  }
-  
-  .auth-container form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .auth-container div {
-    margin-bottom: 10px;
-  }
-  
-  .auth-container button {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .auth-container button:hover {
-    background-color: #45a049;
-  }
-  </style>
-  
+  },
+};
+</script>
+
+<style scoped>
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  font-family: "Arial", sans-serif;
+  flex-direction: column;
+}
+
+.auth-header {
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+  text-align: left;
+}
+
+.submit-btn {
+  margin-top: 1.5rem;
+  width: 100%;
+}
+
+.input-field {
+  margin-top: 1.5rem;
+  width: 100%;
+  display: block;
+}
+
+.auth-form {
+  padding: 1.5rem;
+  min-width: 500px;
+  text-align: center;
+}
+</style>
