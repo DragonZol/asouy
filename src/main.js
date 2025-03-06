@@ -8,8 +8,11 @@ import Button from "primevue/button"
 import Card from 'primevue/card';
 import Checkbox from 'primevue/checkbox';
 import InputText from 'primevue/inputtext';
+import InputNumber from 'primevue/inputnumber';
 import InputMask from 'primevue/inputmask';
 import Password from 'primevue/password';
+import DatePicker from 'primevue/datepicker';
+import Select from 'primevue/select';
 
 import { Form } from '@primevue/forms';
 import 'primeicons/primeicons.css'
@@ -29,6 +32,9 @@ app.component('InputText', InputText);
 app.component('Form', Form);
 app.component('Password', Password);
 app.component('InputMask', InputMask);
+app.component('DatePicker', DatePicker);
+app.component('InputNumber', InputNumber);
+app.component('Select', Select);
 app.use(PrimeVue, {
     theme: {
         preset: Aura,
