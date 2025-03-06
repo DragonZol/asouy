@@ -1,9 +1,5 @@
 <template>
   <div class="auth-container">
-    <h2 class="auth-header">
-      <i class="pi pi-globe" style="color: green; font-size: 3rem"></i>
-      ВЛБ - Ваш лучший банк
-    </h2>
     <Card class="auth-form">
       <template #title>Регистрация</template>
       <template #content>
@@ -80,15 +76,8 @@ export default {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   font-family: "Arial", sans-serif;
   flex-direction: column;
-}
-
-.auth-header {
-  font-size: 2.5rem;
-  margin-bottom: 2rem;
-  text-align: center;
 }
 
 .form-group {

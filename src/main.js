@@ -3,6 +3,7 @@ import { createApp } from 'vue'
 // Import PrimeVue stuff
 import PrimeVue from 'primevue/config';
 import Aura  from '@primeuix/themes/aura';
+import ToggleSwitch from 'primevue/toggleswitch';
 import Button from "primevue/button"
 import Card from 'primevue/card';
 import Checkbox from 'primevue/checkbox';
@@ -20,6 +21,7 @@ import router from './router';
 
 
 const app = createApp(App);
+app.component('ToggleSwitch', ToggleSwitch);
 app.component('Button', Button);
 app.component('Card', Card);
 app.component('Checkbox', Checkbox);
