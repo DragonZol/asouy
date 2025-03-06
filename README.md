@@ -1,5 +1,38 @@
-# Vue 3 + Vite
+# Vue.js Project with Vite and PrimeVue
 
-This template should help get you started developing with Vue 3 in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Требования
 
-Learn more about IDE Support for Vue in the [Vue Docs Scaling up Guide](https://vuejs.org/guide/scaling-up/tooling.html#ide-support).
+- [Node.js](https://nodejs.org/)
+- [npm](https://npmjs.com/) или [yarn](https://yarnpkg.com/)
+
+## Установка
+
+### 1. Клонирование
+
+```bash
+git clone https://github.com/dogee4803/vlb-study-project.git
+cd vlb-study-project
+```
+
+### 2. Уставнока зависимостей
+```
+npm install
+```
+или
+```
+yarn install
+```
+
+### 3. На всякий случай т.к. пару раз тупило
+```
+npm install primevue@latest primeicons@latest
+```
+
+### 4. Запуск
+```
+npm run dev
+```
+или
+```
+yarn dev
+```
