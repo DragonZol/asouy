@@ -1,3 +1,4 @@
+<!-- todo добавить переход куда-нибудь-->
 <template>
   <div class="notfound-container">
     <Card>
@@ -23,13 +24,11 @@
   justify-content: center;
   text-align: center;
   align-items: center;
-  height: 100vh;
   font-family: 'Arial', sans-serif;
 }
 
 .notfound-content {
   padding: 2rem;
-  background-color: #ffffff;
   border-radius: 10px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
