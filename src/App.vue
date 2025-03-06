@@ -1,5 +1,4 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
 function toggleDarkMode() {
     const isDarkMode = document.documentElement.classList.toggle('my-app-dark');
     localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled');
