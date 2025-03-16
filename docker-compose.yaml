@@ -1,0 +1,39 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: postgres:17.4  # Лучше использовать 15 (17 может быть нестабильным)
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+      POSTGRES_DB: assouy
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d assouy"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  project_assouy:
+    image: project_assouy:latest
+    build:
+      context: .
+      args:
+        DOCKER_BUILDKIT: 1
+    restart: always
+    ports:
+      - "8080:8080"
+    depends_on:
+      postgres:
+        condition: service_healthy  # Ожидание пока PostgreSQL станет доступным
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/assouy
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: admin
+
+volumes:
+  postgres_data:
