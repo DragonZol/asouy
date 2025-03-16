@@ -1,12 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="AmplicodePersistenceUnitSettings">
-    <persistence-units>
-      <persistence-unit name="Default" defaultIncludeChangeLogFile="src/main/resources/db/changelog/db.changelog-master.xml">
-        <packages>
-          <package value="com.example.project_assouy" />
-        </packages>
-      </persistence-unit>
-    </persistence-units>
+  <component name="AmplicodeJpaPluginProjectSettings">
+    <option name="lastSelectedLanguage" value="Java" />
   </component>
 </project>

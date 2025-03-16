@@ -1,0 +1,17 @@
+spring:
+  application:
+    name: project_assouy
+  datasource:
+    url: jdbc:postgresql://localhost:5432/assouy
+    username: postgres
+    password: admin
+    driver-class-name: org.postgresql.Driver
+  liquibase:
+    change-log: classpath:/db/changelog/master.xml
+  jpa:
+    show-sql: true
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        format_sql: true
