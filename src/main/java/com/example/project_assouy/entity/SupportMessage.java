@@ -16,7 +16,7 @@ import java.time.Instant;
 @Table(name = "support_messages")
 public class SupportMessage extends StandartEntityId {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "ticket_id")
     private SupportTicket ticket;
