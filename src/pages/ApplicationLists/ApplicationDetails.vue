@@ -89,8 +89,7 @@ export default {
 };
 </script>
 
-<style>
-/* Основные стили */
+<style scoped>
 .details-container {
     max-width: 800px;
     margin: auto;
@@ -110,20 +109,23 @@ export default {
 
 .section-title {
     margin-top: 20px;
-    border-bottom: 1px solid #ddd;
+    border-bottom: 2px solid #ddd;
     padding-bottom: 10px;
-}
-
-/* Темная тема для заголовка */
-.my-app-dark .section-title {
-    border-bottom: 2px solid #555;
+    font-size: 1.5rem;
 }
 
 .details-grid {
     display: grid;
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, 1fr);
     gap: 15px;
     margin: 20px 0;
+}
+
+.details-grid div {
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 5px;
+    border: 1px solid #eee;
 }
 
 .actions {
@@ -132,15 +134,20 @@ export default {
     gap: 10px;
 }
 
-/* Стили кнопок */
 .approve-btn {
     background-color: #4caf50;
     color: white;
+    width: 48%;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 .reject-btn {
-    background-color: #f44336 !important;
+    background-color: #f44336;
     color: white;
+    width: 48%;
+    padding: 10px;
+    border-radius: 5px;
 }
 
 /* Темные стили кнопок */
@@ -151,4 +158,6 @@ export default {
 .my-app-dark .reject-btn {
     background-color: #e57373;
 }
+
+
 </style>

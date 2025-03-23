@@ -7,6 +7,7 @@ import ApplicationList from '../pages/ApplicationLists/ApplicationList.vue'
 import ApplicationDetails from '../pages/ApplicationLists/ApplicationDetails.vue'
 
 const routes = [
+  { path: '/', redirect: '/sign-in' },
   { path: '/sign-up', component: Register },
   { path: '/sign-in', component: Login },
   { path: '/apply_form', component: ApplyPage},
