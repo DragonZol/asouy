@@ -16,12 +16,12 @@ import java.time.Instant;
 @Table(name = "loan_approval")
 public class LoanApproval extends StandartEntityId{
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "loan_application_id")
     private LoanApplication loanApplication;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "approver_id")
     private User approver;
 

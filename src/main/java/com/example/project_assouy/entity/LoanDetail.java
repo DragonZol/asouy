@@ -17,7 +17,7 @@ import java.util.UUID;
 @Table(name = "loan_details")
 public class LoanDetail extends StandartEntityId{
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "loan_application_id", nullable = false)
     private LoanApplication loanApplication;

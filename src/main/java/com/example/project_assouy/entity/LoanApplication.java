@@ -17,7 +17,7 @@ import java.time.Instant;
 @Table(name = "loan_applications")
 public class LoanApplication extends StandartEntityId {
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id")
     private User user;

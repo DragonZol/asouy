@@ -16,7 +16,7 @@ import org.hibernate.annotations.OnDeleteAction;
 @Table(name = "support_tickets")
 public class SupportTicket extends StandartEntityId{
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id")
     private User user;
