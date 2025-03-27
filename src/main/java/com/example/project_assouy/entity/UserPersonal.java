@@ -16,7 +16,7 @@ import java.util.UUID;
 @Entity
 @Table(name = "user_personal")
 public class UserPersonal extends StandartEntityId {
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "user_id", nullable = false)
     private User userId;

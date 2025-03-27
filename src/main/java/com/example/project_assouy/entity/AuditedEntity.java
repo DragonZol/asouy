@@ -11,6 +11,7 @@ import javax.persistence.Column;
 import javax.persistence.EntityListeners;
 import javax.persistence.MappedSuperclass;
 import java.io.Serializable;
+import java.time.LocalDateTime;
 import java.util.Date;
 @Data
 @MappedSuperclass
@@ -20,7 +21,7 @@ abstract public class AuditedEntity implements Serializable {
 
     @CreatedDate
     @Column(name = "CREATE_TS", updatable = false)
-    protected Date createTs = new Date();
+    protected LocalDateTime createTs ;
 
     @CreatedBy
     @Column(name = "CREATED_BY", length = 50, updatable = false)
@@ -28,14 +29,14 @@ abstract public class AuditedEntity implements Serializable {
 
     @LastModifiedDate
     @Column(name = "UPDATE_TS")
-    protected Date updateTs = new Date();
+    protected LocalDateTime updateTs ;
 
     @LastModifiedBy
     @Column(name = "UPDATED_BY", length = 50)
     protected String updatedBy;
 
     @Column(name = "DELETE_TS")
-    protected Date deleteTs;
+    protected LocalDateTime deleteTs;
 
     @Column(name = "DELETED_BY", length = 50)
     protected String deletedBy;
