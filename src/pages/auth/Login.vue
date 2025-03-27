@@ -15,7 +15,6 @@
           </div>
 
           <div class="form-group">
-            <!-- FIXME Пароль не растягивается по ширине-->
             <Password
               v-model="password"
               id="password"
@@ -27,11 +26,11 @@
             />
           </div>
 
-          <div style="display: flex">
+          <div style="display: flex; align-items: center;">
             <Checkbox v-model="remember_me" binary />
-            <label for="remember_me" style="margin-left: 0.5rem"
-              >Запомнить меня</label
-            >
+            <label for="remember_me" style="margin-left: 0.5rem;">
+              Запомнить меня
+            </label>
           </div>
 
           <Button label="Войти" type="submit" class="submit-btn" />
@@ -46,11 +45,8 @@
 </template>
 
 <script>
-import { ref } from "vue";
-
-const remember_me = ref(false);
-
 export default {
+  name: "Login",
   data() {
     return {
       login: "",
@@ -59,8 +55,45 @@ export default {
     };
   },
   methods: {
-    handleSubmit() {
-      console.log("Вход:", this.login, this.password, this.remember_me);
+    async handleSubmit() {
+      try {
+        const response = await fetch("http://185.255.179.139/my_api/index.php?route=auth/login", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            login: this.login,
+            password: this.password,
+          }),
+        });
+
+        const data = await response.json();
+        if (!response.ok) {
+          throw new Error(data.error || "Ошибка при входе (status " + response.status + ")");
+        }
+
+        // Сохраняем токен в localStorage или sessionStorage
+        if (this.remember_me) {
+          localStorage.setItem("token", data.token)
+          localStorage.setItem("role", data.role)
+        } else {
+          sessionStorage.setItem("token", data.token)
+          sessionStorage.setItem("role", data.role)
+        }
+
+        // Перенаправляем пользователя в зависимости от роли
+        if (data.role === "client") {
+          this.$router.push("/apply_form");
+        } else if (data.role === "admin") {
+          this.$router.push("/applications");
+        } else {
+          alert("Неизвестная роль, перенаправление невозможно");
+        }
+
+        console.log("Успешный вход:", data);
+      } catch (error) {
+        console.error("Ошибка при входе:", error);
+        alert("Ошибка при входе: " + error.message);
+      }
     },
   },
 };
