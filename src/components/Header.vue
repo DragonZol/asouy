@@ -35,12 +35,13 @@
 <script setup>
 import { ref, watch } from 'vue'
 import ToggleSwitch from 'primevue/toggleswitch'
+console.log(localStorage)
 
 // Считываем состояние тёмной темы из localStorage
 const checked = ref(localStorage.getItem('darkMode') === 'enabled')
 
 // Считываем ФИО пользователя из sessionStorage (или задаём заглушку)
-const userFullName = ref(sessionStorage.getItem('userFullName') || 'Пользователь С.Л.')
+const userFullName = ref(sessionStorage.getItem('name') || 'Пользователь С.Л.')
 
 // Функция переключения тёмной темы
 function toggleDarkMode() {

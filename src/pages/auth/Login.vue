@@ -75,9 +75,11 @@ export default {
         if (this.remember_me) {
           localStorage.setItem("token", data.token)
           localStorage.setItem("role", data.role)
+          localStorage.setItem("name", data.name)
         } else {
           sessionStorage.setItem("token", data.token)
           sessionStorage.setItem("role", data.role)
+          sessionStorage.setItem("name", data.name)
         }
 
         // Перенаправляем пользователя в зависимости от роли
