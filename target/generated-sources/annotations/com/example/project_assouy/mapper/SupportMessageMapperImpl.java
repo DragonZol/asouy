@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-28T10:59:59+0800",
-    comments = "version: 1.6.0, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2025-03-28T12:08:09+0800",
+    comments = "version: 1.6.0, compiler: Eclipse JDT (IDE) 3.42.0.v20250325-2231, environment: Java 21.0.6 (Eclipse Adoptium)"
 )
 @Component
 public class SupportMessageMapperImpl implements SupportMessageMapper {
@@ -30,9 +30,9 @@ public class SupportMessageMapperImpl implements SupportMessageMapper {
         SupportMessage supportMessage = new SupportMessage();
 
         supportMessage.setId( supportMessageDto.getId() );
-        supportMessage.setTicket( supportTicketMapper.toEntity( supportMessageDto.getTicket() ) );
-        supportMessage.setSender( supportMessageDto.getSender() );
         supportMessage.setMessage( supportMessageDto.getMessage() );
+        supportMessage.setSender( supportMessageDto.getSender() );
+        supportMessage.setTicket( supportTicketMapper.toEntity( supportMessageDto.getTicket() ) );
 
         return supportMessage;
     }
@@ -65,9 +65,9 @@ public class SupportMessageMapperImpl implements SupportMessageMapper {
         }
 
         supportMessage.setId( supportMessageDto.getId() );
-        supportMessage.setTicket( supportTicketMapper.toEntity( supportMessageDto.getTicket() ) );
-        supportMessage.setSender( supportMessageDto.getSender() );
         supportMessage.setMessage( supportMessageDto.getMessage() );
+        supportMessage.setSender( supportMessageDto.getSender() );
+        supportMessage.setTicket( supportTicketMapper.toEntity( supportMessageDto.getTicket() ) );
 
         return supportMessage;
     }

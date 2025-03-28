@@ -13,8 +13,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-28T10:59:59+0800",
-    comments = "version: 1.6.0, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2025-03-28T12:08:09+0800",
+    comments = "version: 1.6.0, compiler: Eclipse JDT (IDE) 3.42.0.v20250325-2231, environment: Java 21.0.6 (Eclipse Adoptium)"
 )
 @Component
 public class LoanApprovalMapperImpl implements LoanApprovalMapper {
@@ -32,8 +32,8 @@ public class LoanApprovalMapperImpl implements LoanApprovalMapper {
 
         LoanApproval loanApproval = new LoanApproval();
 
-        loanApproval.setLoanApplication( loanApplicationMapper.toEntity( loanApprovalDto.getLoanApplication() ) );
         loanApproval.setApprover( userMapper.toEntity( loanApprovalDto.getApprover() ) );
+        loanApproval.setLoanApplication( loanApplicationMapper.toEntity( loanApprovalDto.getLoanApplication() ) );
         loanApproval.setStage( loanApprovalDto.getStage() );
         loanApproval.setStatus( loanApprovalDto.getStatus() );
 
@@ -67,6 +67,7 @@ public class LoanApprovalMapperImpl implements LoanApprovalMapper {
             return loanApproval;
         }
 
+        loanApproval.setApprover( userMapper.toEntity( loanApprovalDto.getApprover() ) );
         if ( loanApprovalDto.getLoanApplication() != null ) {
             if ( loanApproval.getLoanApplication() == null ) {
                 loanApproval.setLoanApplication( new LoanApplication() );
@@ -76,7 +77,6 @@ public class LoanApprovalMapperImpl implements LoanApprovalMapper {
         else {
             loanApproval.setLoanApplication( null );
         }
-        loanApproval.setApprover( userMapper.toEntity( loanApprovalDto.getApprover() ) );
         loanApproval.setStage( loanApprovalDto.getStage() );
         loanApproval.setStatus( loanApprovalDto.getStatus() );
 

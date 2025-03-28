@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-28T10:59:59+0800",
-    comments = "version: 1.6.0, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2025-03-28T12:08:10+0800",
+    comments = "version: 1.6.0, compiler: Eclipse JDT (IDE) 3.42.0.v20250325-2231, environment: Java 21.0.6 (Eclipse Adoptium)"
 )
 @Component
 public class LoanApplicationMapperImpl implements LoanApplicationMapper {
@@ -28,10 +28,10 @@ public class LoanApplicationMapperImpl implements LoanApplicationMapper {
 
         LoanApplication loanApplication = new LoanApplication();
 
-        loanApplication.setUser( userMapper.toEntity( loanApplicationDto.getUser() ) );
         loanApplication.setAmount( loanApplicationDto.getAmount() );
-        loanApplication.setTermYears( loanApplicationDto.getTermYears() );
         loanApplication.setStatus( loanApplicationDto.getStatus() );
+        loanApplication.setTermYears( loanApplicationDto.getTermYears() );
+        loanApplication.setUser( userMapper.toEntity( loanApplicationDto.getUser() ) );
 
         return loanApplication;
     }
@@ -63,10 +63,10 @@ public class LoanApplicationMapperImpl implements LoanApplicationMapper {
             return loanApplication;
         }
 
-        loanApplication.setUser( userMapper.toEntity( loanApplicationDto.getUser() ) );
         loanApplication.setAmount( loanApplicationDto.getAmount() );
-        loanApplication.setTermYears( loanApplicationDto.getTermYears() );
         loanApplication.setStatus( loanApplicationDto.getStatus() );
+        loanApplication.setTermYears( loanApplicationDto.getTermYears() );
+        loanApplication.setUser( userMapper.toEntity( loanApplicationDto.getUser() ) );
 
         return loanApplication;
     }

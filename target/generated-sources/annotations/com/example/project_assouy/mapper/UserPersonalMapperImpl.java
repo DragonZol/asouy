@@ -12,8 +12,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-28T10:59:59+0800",
-    comments = "version: 1.6.0, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2025-03-28T13:04:29+0800",
+    comments = "version: 1.6.0, compiler: Eclipse JDT (IDE) 3.42.0.v20250325-2231, environment: Java 21.0.6 (Eclipse Adoptium)"
 )
 @Component
 public class UserPersonalMapperImpl implements UserPersonalMapper {
@@ -29,11 +29,11 @@ public class UserPersonalMapperImpl implements UserPersonalMapper {
 
         UserPersonal userPersonal = new UserPersonal();
 
-        userPersonal.setUserId( userMapper.toEntity( userPersonalDto.getUserId() ) );
-        userPersonal.setFullName( userPersonalDto.getFullName() );
         userPersonal.setBirthDate( userPersonalDto.getBirthDate() );
         userPersonal.setEmail( userPersonalDto.getEmail() );
+        userPersonal.setFullName( userPersonalDto.getFullName() );
         userPersonal.setRegion( userPersonalDto.getRegion() );
+        userPersonal.setUserId( userMapper.toEntity( userPersonalDto.getUserId() ) );
 
         return userPersonal;
     }
@@ -67,11 +67,11 @@ public class UserPersonalMapperImpl implements UserPersonalMapper {
             return userPersonal;
         }
 
-        userPersonal.setUserId( userMapper.toEntity( userPersonalDto.getUserId() ) );
-        userPersonal.setFullName( userPersonalDto.getFullName() );
         userPersonal.setBirthDate( userPersonalDto.getBirthDate() );
         userPersonal.setEmail( userPersonalDto.getEmail() );
+        userPersonal.setFullName( userPersonalDto.getFullName() );
         userPersonal.setRegion( userPersonalDto.getRegion() );
+        userPersonal.setUserId( userMapper.toEntity( userPersonalDto.getUserId() ) );
 
         return userPersonal;
     }
@@ -85,9 +85,9 @@ public class UserPersonalMapperImpl implements UserPersonalMapper {
         UserPersonal userPersonal = new UserPersonal();
 
         userPersonal.setUserId( userRegistrationDtoToUser( userRegistrationDto ) );
-        userPersonal.setFullName( userRegistrationDto.getFullName() );
         userPersonal.setBirthDate( userRegistrationDto.getBirthDate() );
         userPersonal.setEmail( userRegistrationDto.getEmail() );
+        userPersonal.setFullName( userRegistrationDto.getFullName() );
         userPersonal.setRegion( userRegistrationDto.getRegion() );
 
         return userPersonal;

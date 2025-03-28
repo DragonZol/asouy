@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-28T10:59:59+0800",
-    comments = "version: 1.6.0, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2025-03-28T12:08:10+0800",
+    comments = "version: 1.6.0, compiler: Eclipse JDT (IDE) 3.42.0.v20250325-2231, environment: Java 21.0.6 (Eclipse Adoptium)"
 )
 @Component
 public class LoanApplicationMapperNewImpl implements LoanApplicationMapperNew {
@@ -28,8 +28,8 @@ public class LoanApplicationMapperNewImpl implements LoanApplicationMapperNew {
         loanApplication.setUser( loanApplicationDtoNewToUser( loanApplicationDtoNew ) );
         loanApplication.setId( loanApplicationDtoNew.getId() );
         loanApplication.setAmount( loanApplicationDtoNew.getAmount() );
-        loanApplication.setTermYears( loanApplicationDtoNew.getTermYears() );
         loanApplication.setStatus( loanApplicationDtoNew.getStatus() );
+        loanApplication.setTermYears( loanApplicationDtoNew.getTermYears() );
 
         return loanApplication;
     }
@@ -65,8 +65,8 @@ public class LoanApplicationMapperNewImpl implements LoanApplicationMapperNew {
 
         loanApplication.setId( loanApplicationDto.getId() );
         loanApplication.setAmount( loanApplicationDto.getAmount() );
-        loanApplication.setTermYears( loanApplicationDto.getTermYears() );
         loanApplication.setStatus( loanApplicationDto.getStatus() );
+        loanApplication.setTermYears( loanApplicationDto.getTermYears() );
 
         return loanApplication;
     }

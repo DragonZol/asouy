@@ -11,8 +11,8 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-28T10:59:59+0800",
-    comments = "version: 1.6.0, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
+    date = "2025-03-28T12:08:10+0800",
+    comments = "version: 1.6.0, compiler: Eclipse JDT (IDE) 3.42.0.v20250325-2231, environment: Java 21.0.6 (Eclipse Adoptium)"
 )
 @Component
 public class LoanDetailMapperImpl implements LoanDetailMapper {
@@ -28,11 +28,11 @@ public class LoanDetailMapperImpl implements LoanDetailMapper {
 
         LoanDetail loanDetail = new LoanDetail();
 
-        loanDetail.setLoanApplication( loanApplicationMapper.toEntity( loanDetailDto.getLoanApplication() ) );
         loanDetail.setCity( loanDetailDto.getCity() );
+        loanDetail.setLoanApplication( loanApplicationMapper.toEntity( loanDetailDto.getLoanApplication() ) );
         loanDetail.setMonthlyIncome( loanDetailDto.getMonthlyIncome() );
-        loanDetail.setWorkExperienceYears( loanDetailDto.getWorkExperienceYears() );
         loanDetail.setRejectionReason( loanDetailDto.getRejectionReason() );
+        loanDetail.setWorkExperienceYears( loanDetailDto.getWorkExperienceYears() );
 
         return loanDetail;
     }
@@ -66,6 +66,7 @@ public class LoanDetailMapperImpl implements LoanDetailMapper {
             return loanDetail;
         }
 
+        loanDetail.setCity( loanDetailDto.getCity() );
         if ( loanDetailDto.getLoanApplication() != null ) {
             if ( loanDetail.getLoanApplication() == null ) {
                 loanDetail.setLoanApplication( new LoanApplication() );
@@ -75,10 +76,9 @@ public class LoanDetailMapperImpl implements LoanDetailMapper {
         else {
             loanDetail.setLoanApplication( null );
         }
-        loanDetail.setCity( loanDetailDto.getCity() );
         loanDetail.setMonthlyIncome( loanDetailDto.getMonthlyIncome() );
-        loanDetail.setWorkExperienceYears( loanDetailDto.getWorkExperienceYears() );
         loanDetail.setRejectionReason( loanDetailDto.getRejectionReason() );
+        loanDetail.setWorkExperienceYears( loanDetailDto.getWorkExperienceYears() );
 
         return loanDetail;
     }
