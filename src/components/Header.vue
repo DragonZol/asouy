@@ -23,10 +23,15 @@
         </ToggleSwitch>
       </div>
 
-      <!-- Информация о пользователе -->
+      <!-- Информация о пользователе и кнопка выхода -->
       <div class="user-info">
         <i class="pi pi-user user-icon"></i>
         <span class="user-name">{{ userFullName }}</span>
+        <!-- Кнопка выхода -->
+        <button class="logout-btn" @click="logout">
+          <i class="pi pi-sign-out"></i>
+          Выход
+        </button>
       </div>
     </div>
   </div>
@@ -34,8 +39,10 @@
 
 <script setup>
 import { ref, watch } from 'vue'
+import { useRouter } from 'vue-router'
 import ToggleSwitch from 'primevue/toggleswitch'
-console.log(localStorage)
+
+const router = useRouter()
 
 // Считываем состояние тёмной темы из localStorage
 const checked = ref(localStorage.getItem('darkMode') === 'enabled')
@@ -57,6 +64,22 @@ watch(checked, toggleDarkMode)
 if (localStorage.getItem('darkMode') === 'enabled') {
   document.documentElement.classList.add('my-app-dark')
 }
+
+// Функция для выхода из профиля
+function logout() {
+  // Удаляем данные пользователя из sessionStorage
+  sessionStorage.removeItem('token')
+  sessionStorage.removeItem('role')
+  sessionStorage.removeItem('name')
+  
+  // Удаляем данные пользователя из localStorage (если использовался "Запомнить меня")
+  localStorage.removeItem('token')
+  localStorage.removeItem('role')
+  localStorage.removeItem('name')
+
+  // Переадресация на страницу логина
+  router.push('/sign-in')
+}
 </script>
 
 <style scoped>
@@ -76,7 +99,7 @@ if (localStorage.getItem('darkMode') === 'enabled') {
 .header-right-section {
   display: flex;
   align-items: center;
-  gap: 20px; /* Расстояние между переключателем и пользователем */
+  gap: 20px;
 }
 
 /* Стили переключателя темы */
@@ -132,11 +155,28 @@ if (localStorage.getItem('darkMode') === 'enabled') {
 
 .user-icon {
   font-size: 1.8rem;
-  color: #555; /* Можете поменять цвет при желании */
+  color: #555;
 }
 
 .user-name {
   font-weight: 500;
   font-size: 1.1rem;
+}
+
+/* Стили кнопки выхода */
+.logout-btn {
+  background-color: transparent;
+  border: none;
+  color: #555;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: color 0.3s;
+}
+
+.logout-btn:hover {
+  color: #d9534f; /* например, красный цвет при наведении */
 }
 </style>
