@@ -41,9 +41,9 @@
               class="input-field"
               style="width: 100%"
               promptLabel="Выберите пароль"
-              weakLabel="Слишком лёгкий"
-              mediumLabel="Хороший пароль"
-              strongLabel="Надёжный пароль"
+              weakLabel="Слишком простой"
+              mediumLabel="Средний"
+              strongLabel="Надёжный"
             />
           </div>
 
@@ -53,7 +53,7 @@
             <InputText
               v-model="userIdEmail"
               id="userIdEmail"
-              placeholder="Введите ваш email"
+              placeholder="Введите email"
               type="email"
               required
               class="input-field"
@@ -66,7 +66,7 @@
             <InputText
               v-model="fullName"
               id="fullName"
-              placeholder="Введите полное имя (пример: Иванов Иван Иванович)"
+              placeholder="Фамилия Имя Отчество"
               required
               class="input-field"
             />
@@ -75,14 +75,13 @@
           <!-- Дата рождения -->
           <div class="form-group">
             <label for="birthDate">Дата рождения</label>
-            <!-- Можно использовать DatePicker PrimeVue, если он подключён;
-                 или обычный InputText, если нужно просто передать строку. -->
             <DatePicker
               v-model="birthDate"
               id="birthDate"
               dateFormat="yy-mm-dd"
               showIcon
               placeholder="ГГГГ-ММ-ДД"
+              required
               class="input-field"
             />
           </div>
@@ -93,7 +92,7 @@
             <InputText
               v-model="region"
               id="region"
-              placeholder="Например: Moscow"
+              placeholder="Например, Москва"
               required
               class="input-field"
             />
@@ -104,7 +103,7 @@
 
           <!-- Ссылка на вход -->
           <div style="text-align: center; margin-top: 1rem">
-            <router-link to="/sign-in">Уже есть аккаунт? Войдите</router-link>
+            <router-link to="/sign-in">Уже есть аккаунт? Войти</router-link>
           </div>
         </Form>
       </template>
@@ -112,59 +111,60 @@
   </div>
 </template>
 
-<script>
-import { ref } from "vue";
-// Если вы используете axios, раскомментируйте строку ниже и закомментируйте пример с fetch.
-// import axios from 'axios';
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-export default {
-  name: "Register",
-  data() {
-    return {
-      userIdPhoneNumber: "",
-      userIdLogin: "",
-      userIdPassword: "",
-      userIdEmail: "",
-      fullName: "",
-      birthDate: null, // храним дату как объект или строку
-      region: "",
+// API базовый URL (замени на свой backend адрес)
+const API_URL = 'http://localhost:8080/api/auth/register';
+
+const router = useRouter();
+
+const userIdPhoneNumber = ref('');
+const userIdLogin = ref('');
+const userIdPassword = ref('');
+const userIdEmail = ref('');
+const fullName = ref('');
+const birthDate = ref(null);
+const region = ref('');
+
+// Регистрация
+async function handleSubmit(event) {
+  event.preventDefault();
+
+  try {
+    const payload = {
+      userIdPhoneNumber: userIdPhoneNumber.value.replace(/[^0-9+]/g, ''),
+      userIdLogin: userIdLogin.value,
+      userIdPasswordHash: userIdPassword.value,
+      userIdRole: 'CLIENT',
+      fullName: fullName.value,
+      birthDate: birthDate.value
+        ? new Date(birthDate.value).toISOString().split('T')[0]
+        : null,
+      email: userIdEmail.value,
+      region: region.value,
     };
-  },
-  methods: {
-    async handleSubmit() {
-      try {
-        const response = await fetch("http://185.255.179.139/my_api/index.php?route=auth/register", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userIdPhoneNumber: this.userIdPhoneNumber.replace(/[^0-9+]/g, ''),
-            userIdLogin: this.userIdLogin,
-            userIdPassword: this.userIdPassword,
-            userIdEmail: this.userIdEmail,
-            fullName: this.fullName,
-            birthDate: this.birthDate
-              ? new Date(this.birthDate).toISOString().split("T")[0]
-              : null,
-            region: this.region,
-          }),
-        });
 
-        const result = await response.json();
-        if (!response.ok) {
-          // Выбрасываем ошибку с текстом, полученным от сервера
-          throw new Error(result.error || `Ошибка при регистрации (status ${response.status})`);
-        }
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
 
-        console.log("Успешная регистрация:", result);
-        this.$router.push("/sign-in");
-      } catch (error) {
-        console.error("Ошибка при регистрации:", error);
-        alert("Ошибка при регистрации: " + error.message);
-      }
-    },
+    const result = await response.json();
 
-  },
-};
+    if (!response.ok) {
+      throw new Error(result.message || `Ошибка регистрации (status ${response.status})`);
+    }
+
+    alert('Регистрация прошла успешно!');
+    router.push('/sign-in');
+  } catch (error) {
+    console.error('Ошибка при регистрации:', error);
+    alert('Ошибка при регистрации: ' + error.message);
+  }
+}
 </script>
 
 <style scoped>
@@ -175,6 +175,12 @@ export default {
   font-family: "Arial", sans-serif;
   flex-direction: column;
   padding: 1rem;
+}
+
+.auth-form {
+  padding: 1.5rem;
+  min-width: 500px;
+  text-align: center;
 }
 
 .form-group {
@@ -188,20 +194,14 @@ export default {
   font-weight: bold;
 }
 
-.submit-btn {
-  margin-top: 1.5rem;
-  width: 100%;
-}
-
 .input-field {
   margin-top: 0.5rem;
   width: 100%;
   display: block;
 }
 
-.auth-form {
-  padding: 1.5rem;
-  min-width: 500px;
-  text-align: center;
+.submit-btn {
+  margin-top: 1.5rem;
+  width: 100%;
 }
 </style>

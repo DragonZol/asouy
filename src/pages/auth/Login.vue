@@ -27,8 +27,8 @@
           </div>
 
           <div style="display: flex; align-items: center;">
-            <Checkbox v-model="remember_me" binary />
-            <label for="remember_me" style="margin-left: 0.5rem;">
+            <Checkbox v-model="rememberMe" binary />
+            <label for="rememberMe" style="margin-left: 0.5rem;">
               Запомнить меня
             </label>
           </div>
@@ -44,61 +44,71 @@
   </div>
 </template>
 
-<script>
-export default {
-  name: "Login",
-  data() {
-    return {
-      login: "",
-      password: "",
-      remember_me: false,
-    };
-  },
-  methods: {
-    async handleSubmit() {
-      try {
-        const response = await fetch("http://185.255.179.139/my_api/index.php?route=auth/login", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            login: this.login,
-            password: this.password,
-          }),
-        });
+<script setup>
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-        const data = await response.json();
-        if (!response.ok) {
-          throw new Error(data.error || "Ошибка при входе (status " + response.status + ")");
-        }
+// URL вашего backend API
+const API_URL = 'http://localhost:8080/api/auth/login';
 
-        // Сохраняем токен в localStorage или sessionStorage
-        if (this.remember_me) {
-          localStorage.setItem("token", data.token)
-          localStorage.setItem("role", data.role)
-          localStorage.setItem("name", data.name)
-        } else {
-          sessionStorage.setItem("token", data.token)
-          sessionStorage.setItem("role", data.role)
-          sessionStorage.setItem("name", data.name)
-        }
+const login = ref('');
+const password = ref('');
+const rememberMe = ref(false);
 
-        // Перенаправляем пользователя в зависимости от роли
-        if (data.role === "client") {
-          this.$router.push("/apply_form");
-        } else if (data.role === "admin") {
-          this.$router.push("/applications");
-        } else {
-          alert("Неизвестная роль, перенаправление невозможно");
-        }
+const router = useRouter();
 
-        console.log("Успешный вход:", data);
-      } catch (error) {
-        console.error("Ошибка при входе:", error);
-        alert("Ошибка при входе: " + error.message);
-      }
-    },
-  },
-};
+async function handleSubmit(event) {
+
+  try {
+    const response = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userIdLogin: login.value,
+        userIdPassword: password.value,
+      }),
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.message || `Ошибка при входе (status ${response.status})`);
+    }
+
+    // Для примера: backend возвращает UserPersonalDto с полями:
+    // { token, role, fullName, userIdLogin, ... }
+
+    const { token, userIdRole, fullName, userIdLogin } = data;
+
+    if (!token || !userIdRole) {
+      throw new Error('Некорректный ответ от сервера');
+    }
+
+    if (rememberMe.value) {
+      localStorage.setItem('token', token);
+      localStorage.setItem('role', userIdRole);
+      localStorage.setItem('name', fullName || '');
+      localStorage.setItem('login', userIdLogin || '');
+    } else {
+      sessionStorage.setItem('token', token);
+      sessionStorage.setItem('role', userIdRole);
+      sessionStorage.setItem('name', fullName || '');
+      sessionStorage.setItem('login', userIdLogin || '');
+    }
+
+    // Перенаправляем пользователя в зависимости от роли
+    if (userIdRole === 'CLIENT') {
+      router.push('/apply_form');
+    } else if (userIdRole === 'ADMIN') {
+      router.push('/applications');
+    } else {
+      alert('Неизвестная роль: доступ ограничен');
+    }
+  } catch (error) {
+    console.error('Ошибка при входе:', error);
+    alert('Ошибка при входе: ' + error.message);
+  }
+}
 </script>
 
 <style scoped>
@@ -110,14 +120,15 @@ export default {
   flex-direction: column;
 }
 
+.auth-form {
+  padding: 1.5rem;
+  min-width: 500px;
+  text-align: center;
+}
+
 .form-group {
   margin-bottom: 1.5rem;
   text-align: left;
-}
-
-.submit-btn {
-  margin-top: 1.5rem;
-  width: 100%;
 }
 
 .input-field {
@@ -126,9 +137,8 @@ export default {
   display: block;
 }
 
-.auth-form {
-  padding: 1.5rem;
-  min-width: 500px;
-  text-align: center;
+.submit-btn {
+  margin-top: 1.5rem;
+  width: 100%;
 }
 </style>
