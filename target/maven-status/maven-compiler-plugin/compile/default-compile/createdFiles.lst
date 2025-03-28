@@ -3,6 +3,8 @@ com\example\project_assouy\entity\UserPersonal.class
 com\example\project_assouy\mapper\UserMapper.class
 com\example\project_assouy\mapper\UserMapperImpl.class
 com\example\project_assouy\controller\LoanApplicationResource.class
+com\example\project_assouy\repo\UserRepository.class
+com\example\project_assouy\controller\UserAuth.class
 com\example\project_assouy\enums\TicketPriority.class
 com\example\project_assouy\repo\SupportMessageRepository.class
 com\example\project_assouy\repo\SupportTicketRepository.class
@@ -10,11 +12,13 @@ com\example\project_assouy\mapper\SupportMessageMapperImpl.class
 com\example\project_assouy\repo\UserDocumentRepository.class
 com\example\project_assouy\mapper\UserPersonalMapperImpl.class
 com\example\project_assouy\dto\LoanApprovalDetailDto.class
+com\example\project_assouy\mapper\LoanApplicationMapperNewImpl.class
 com\example\project_assouy\mapper\LoanApplicationMapper.class
 com\example\project_assouy\mapper\LoanApprovalDetailMapperImpl.class
 com\example\project_assouy\repo\LoanDetailRepository.class
 com\example\project_assouy\controller\SupportMessageResource.class
 com\example\project_assouy\ProjectAssouyApplication.class
+com\example\project_assouy\service\UserService.class
 com\example\project_assouy\mapper\LoanApplicationMapperImpl.class
 com\example\project_assouy\mapper\LoanApprovalMapper.class
 com\example\project_assouy\dto\LoanApplicationDto.class
@@ -23,6 +27,7 @@ com\example\project_assouy\dto\LoanDetailDto.class
 com\example\project_assouy\enums\StatusApplication.class
 com\example\project_assouy\controller\LoanDetailResource.class
 com\example\project_assouy\controller\LoanApprovalResource.class
+com\example\project_assouy\mapper\LoanApplicationMapperNew.class
 com\example\project_assouy\entity\SupportTicketMapper.class
 com\example\project_assouy\entity\User.class
 com\example\project_assouy\enums\StatusApproval.class
@@ -40,6 +45,7 @@ com\example\project_assouy\entity\LoanApprovalDetail.class
 com\example\project_assouy\enums\Stage.class
 com\example\project_assouy\mapper\UserDocumentMapperImpl.class
 com\example\project_assouy\repo\LoanApplicationRepository.class
+com\example\project_assouy\dto\UserLoginDto.class
 com\example\project_assouy\mapper\UserPersonalMapper.class
 com\example\project_assouy\controller\UserPersonalResource.class
 com\example\project_assouy\mapper\LoanDetailMapper.class
@@ -53,9 +59,11 @@ com\example\project_assouy\entity\UserDocument.class
 com\example\project_assouy\entity\SupportMessage.class
 com\example\project_assouy\entity\UserSecurity.class
 com\example\project_assouy\entity\SupportTicketMapperImpl.class
+com\example\project_assouy\dto\UserRegistrationDto.class
 com\example\project_assouy\entity\AuditedEntity.class
 com\example\project_assouy\enums\MessageSender.class
 com\example\project_assouy\controller\UserDocumentResource.class
+com\example\project_assouy\dto\LoanApplicationDtoNew.class
 com\example\project_assouy\entity\SupportTicket.class
 com\example\project_assouy\repo\LoanApprovalRepository.class
 com\example\project_assouy\entity\LoanDetail.class
