@@ -5,7 +5,7 @@
       <i class="pi pi-globe" style="color: green; font-size: 3rem"></i> ВЛБ - Ваш лучший банк
     </h2>
 
-    <!-- Правая часть: переключатель темы и пользователь -->
+    <!-- Правая часть: всегда показываем переключатель темы, а информацию о пользователе – только если не страница входа/регистрации -->
     <div class="header-right-section">
       <!-- Переключатель темы -->
       <div class="toggle-container">
@@ -23,31 +23,38 @@
         </ToggleSwitch>
       </div>
 
-      <!-- Информация о пользователе и кнопка выхода -->
-      <div class="user-info">
-        <i class="pi pi-user user-icon"></i>
-        <span class="user-name">{{ userFullName }}</span>
-        <!-- Кнопка выхода -->
-        <button class="logout-btn" @click="logout">
-          <i class="pi pi-sign-out"></i>
-          Выход
-        </button>
-      </div>
+      <!-- Блок информации о пользователе и кнопка выхода показывается только когда мы не на страницах входа/регистрации -->
+      <template v-if="!isAuthPage">
+        <div class="user-info">
+          <i class="pi pi-user user-icon"></i>
+          <span class="user-name">{{ userFullName }}</span>
+          <button class="logout-btn" @click="logout">
+            <i class="pi pi-sign-out"></i>
+            Выход
+          </button>
+        </div>
+      </template>
     </div>
   </div>
 </template>
 
 <script setup>
-import { ref, watch } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref, watch, computed } from 'vue'
+import { useRouter, useRoute } from 'vue-router'
 import ToggleSwitch from 'primevue/toggleswitch'
 
 const router = useRouter()
+const route = useRoute()
+
+// Определяем, является ли текущий маршрут страницей входа или регистрации
+const isAuthPage = computed(() => {
+  return route.path === '/sign-in' || route.path === '/sign-up'
+})
 
 // Считываем состояние тёмной темы из localStorage
 const checked = ref(localStorage.getItem('darkMode') === 'enabled')
 
-// Считываем ФИО пользователя из sessionStorage (или задаём заглушку)
+// Считываем ФИО пользователя из sessionStorage или задаём заглушку, если данных нет
 const userFullName = ref(sessionStorage.getItem('name') || 'Пользователь С.Л.')
 
 // Функция переключения тёмной темы
@@ -57,10 +64,10 @@ function toggleDarkMode() {
   localStorage.setItem('darkMode', isDarkMode ? 'enabled' : 'disabled')
 }
 
-// Следим за изменением переключателя
+// Следим за изменением переключателя темы
 watch(checked, toggleDarkMode)
 
-// Если при загрузке странички darkMode = 'enabled', сразу включаем тёмную тему
+// Если при загрузке странички значение в localStorage === 'enabled', добавляем класс для тёмной темы
 if (localStorage.getItem('darkMode') === 'enabled') {
   document.documentElement.classList.add('my-app-dark')
 }
@@ -72,7 +79,7 @@ function logout() {
   sessionStorage.removeItem('role')
   sessionStorage.removeItem('name')
   
-  // Удаляем данные пользователя из localStorage (если использовался "Запомнить меня")
+  // Удаляем данные пользователя из localStorage (на случай, если используется "Запомнить меня")
   localStorage.removeItem('token')
   localStorage.removeItem('role')
   localStorage.removeItem('name')
@@ -177,6 +184,6 @@ function logout() {
 }
 
 .logout-btn:hover {
-  color: #d9534f; /* например, красный цвет при наведении */
+  color: #d9534f;
 }
 </style>
