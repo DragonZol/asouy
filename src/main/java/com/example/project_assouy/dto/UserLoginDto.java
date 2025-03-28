@@ -11,9 +11,9 @@ import lombok.Value;
 public class UserLoginDto {
     @NotBlank(message = "Login не может быть пустым")
     @Size(max = 50, message = "Login не должен превышать 50 символов")
-    String userIdLogin;
+    String login;
 
     @NotBlank(message = "Пароль не может быть пустым")
     @Size(max = 255, message = "Пароль не должен превышать 255 символов")
-    String userPassword;
+    String password;
 }

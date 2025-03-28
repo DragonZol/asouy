@@ -4,13 +4,14 @@ import com.example.project_assouy.dto.SupportTicketDto;
 import com.example.project_assouy.enums.TicketPriority;
 import com.example.project_assouy.enums.TicketStatus;
 import com.example.project_assouy.mapper.UserMapper;
+import java.util.UUID;
 import javax.annotation.processing.Generated;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2025-03-27T18:44:53+0800",
+    date = "2025-03-28T10:59:59+0800",
     comments = "version: 1.6.0, compiler: javac, environment: Java 23.0.2 (Oracle Corporation)"
 )
 @Component
@@ -51,7 +52,8 @@ public class SupportTicketMapperImpl implements SupportTicketMapper {
 
         SupportTicket supportTicket = new SupportTicket();
 
-        supportTicket.setUser( userMapper.toEntity( supportTicketDto.getUser() ) );
+        supportTicket.setUser( supportTicketDtoToUser( supportTicketDto ) );
+        supportTicket.setId( supportTicketDto.getId() );
         supportTicket.setTitle( supportTicketDto.getTitle() );
         supportTicket.setDescription( supportTicketDto.getDescription() );
         supportTicket.setPriority( supportTicketDto.getPriority() );
@@ -66,19 +68,23 @@ public class SupportTicketMapperImpl implements SupportTicketMapper {
             return null;
         }
 
+        String userLogin = null;
+        UUID id = null;
         User user = null;
         String title = null;
         String description = null;
         TicketPriority priority = null;
         TicketStatus status = null;
 
+        userLogin = supportTicketUserLogin( supportTicket );
+        id = supportTicket.getId();
         user = userMapper.toEntity( supportTicket.getUser() );
         title = supportTicket.getTitle();
         description = supportTicket.getDescription();
         priority = supportTicket.getPriority();
         status = supportTicket.getStatus();
 
-        SupportTicketDto supportTicketDto = new SupportTicketDto( user, title, description, priority, status );
+        SupportTicketDto supportTicketDto = new SupportTicketDto( user, id, userLogin, title, description, priority, status );
 
         return supportTicketDto;
     }
@@ -89,6 +95,7 @@ public class SupportTicketMapperImpl implements SupportTicketMapper {
             return supportTicket;
         }
 
+        supportTicket.setId( supportTicketDto.getId() );
         supportTicket.setUser( userMapper.toEntity( supportTicketDto.getUser() ) );
         supportTicket.setTitle( supportTicketDto.getTitle() );
         supportTicket.setDescription( supportTicketDto.getDescription() );
@@ -96,5 +103,25 @@ public class SupportTicketMapperImpl implements SupportTicketMapper {
         supportTicket.setStatus( supportTicketDto.getStatus() );
 
         return supportTicket;
+    }
+
+    protected User supportTicketDtoToUser(SupportTicketDto supportTicketDto) {
+        if ( supportTicketDto == null ) {
+            return null;
+        }
+
+        User user = new User();
+
+        user.setLogin( supportTicketDto.getUserLogin() );
+
+        return user;
+    }
+
+    private String supportTicketUserLogin(SupportTicket supportTicket) {
+        User user = supportTicket.getUser();
+        if ( user == null ) {
+            return null;
+        }
+        return user.getLogin();
     }
 }

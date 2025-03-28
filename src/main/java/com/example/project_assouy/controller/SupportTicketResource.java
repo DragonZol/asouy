@@ -4,6 +4,7 @@ import com.example.project_assouy.dto.SupportTicketDto;
 import com.example.project_assouy.entity.SupportTicket;
 import com.example.project_assouy.entity.SupportTicketMapper;
 import com.example.project_assouy.repo.SupportTicketRepository;
+import com.example.project_assouy.repo.UserRepository;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.validation.Valid;
@@ -13,13 +14,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/crud/supportTickets")
+@RequestMapping("/api/support/tickets")
 @RequiredArgsConstructor
 public class SupportTicketResource {
 
@@ -28,6 +30,7 @@ public class SupportTicketResource {
     private final SupportTicketMapper supportTicketMapper;
 
     private final ObjectMapper objectMapper;
+    private final UserRepository userRepository;
 
     @GetMapping
     public List<SupportTicketDto> getAll() {
@@ -55,6 +58,9 @@ public class SupportTicketResource {
     @PostMapping
     public SupportTicketDto create(@RequestBody @Valid SupportTicketDto dto) {
         SupportTicket supportTicket = supportTicketMapper.toEntity(dto);
+        supportTicket.setUser(userRepository.findUserByLogin(dto.getUserLogin()));
+        supportTicket.setCreatedBy("admin");
+        supportTicket.setCreateTs(LocalDateTime.now());
         SupportTicket resultSupportTicket = supportTicketRepository.save(supportTicket);
         return supportTicketMapper.toSupportTicketDto(resultSupportTicket);
     }

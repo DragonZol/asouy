@@ -7,8 +7,10 @@ D:\Work\assouy\src\main\java\com\example\project_assouy\repo\UserDocumentReposit
 D:\Work\assouy\src\main\java\com\example\project_assouy\dto\LoanApprovalDetailDto.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\enums\StatusApplication.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\mapper\UserMapper.java
+D:\Work\assouy\src\main\java\com\example\project_assouy\dto\LoanApplicationDtoNew.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\repo\SupportTicketRepository.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\dto\SupportTicketDto.java
+D:\Work\assouy\src\main\java\com\example\project_assouy\dto\UserLoginDto.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\entity\LoanApprovalDetail.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\mapper\LoanDetailMapper.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\repo\LoanApprovalRepository.java
@@ -16,6 +18,7 @@ D:\Work\assouy\src\main\java\com\example\project_assouy\entity\UserSecurity.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\controller\SupportMessageResource.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\dto\UserPersonalDto.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\enums\MessageSender.java
+D:\Work\assouy\src\main\java\com\example\project_assouy\service\UserService.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\controller\LoanDetailResource.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\mapper\LoanApprovalDetailMapper.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\entity\SupportTicketMapper.java
@@ -39,11 +42,15 @@ D:\Work\assouy\src\main\java\com\example\project_assouy\entity\SupportTicket.jav
 D:\Work\assouy\src\main\java\com\example\project_assouy\entity\SupportMessage.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\ProjectAssouyApplication.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\repo\LoanDetailRepository.java
+D:\Work\assouy\src\main\java\com\example\project_assouy\mapper\LoanApplicationMapperNew.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\dto\LoanApplicationDto.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\enums\TicketStatus.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\mapper\SupportMessageMapper.java
+D:\Work\assouy\src\main\java\com\example\project_assouy\dto\UserRegistrationDto.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\entity\AuditedEntity.java
+D:\Work\assouy\src\main\java\com\example\project_assouy\controller\UserAuth.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\enums\TicketPriority.java
+D:\Work\assouy\src\main\java\com\example\project_assouy\repo\UserRepository.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\mapper\UserPersonalMapper.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\controller\UserPersonalResource.java
 D:\Work\assouy\src\main\java\com\example\project_assouy\dto\LoanDetailDto.java
